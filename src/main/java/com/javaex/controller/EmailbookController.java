@@ -13,7 +13,8 @@ import com.javaex.vo.EmailBookVo;
 
 @Controller
 public class EmailbookController {
-
+	
+	private EmailBookDao dao = new EmailBookDao();
 	
 	@RequestMapping(value="/writeform", method=RequestMethod.GET)
 	public String writeForm() {
@@ -26,7 +27,6 @@ public class EmailbookController {
 		
 		System.out.println(emailBookVo.toString());
 		
-		EmailBookDao dao = new EmailBookDao();
 		dao.insert(emailBookVo);
 		
 		return "redirect:/list";
@@ -35,7 +35,6 @@ public class EmailbookController {
 	@RequestMapping(value="/list", method=RequestMethod.GET)
 	public String list(Model model) {
 		
-		EmailBookDao dao = new EmailBookDao();
 		List<EmailBookVo> list = dao.getList();
 		
 		model.addAttribute("list", list);
